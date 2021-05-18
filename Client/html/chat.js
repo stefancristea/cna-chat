@@ -23,7 +23,13 @@ const onClick = () =>
 
 const sendMessage = () =>
 {
-  
+  const message = $("#message").val();
+
+  if (message == undefined)
+    return;
+
+  ipc.invoke('sendMessage', message);
+  $("#message").val("");
 };
 
 const onServerResponse = (response_string) =>
@@ -58,6 +64,10 @@ const onServerResponse = (response_string) =>
     }
     case 2:
     {
+      const message = response.content;
+      const sender = response.sender;
+
+      $("#msg-list").append(`<div class = 'msg'><div class = "msg-sender">${sender}</div><div class = "msg-content">${message}</div></div>`);
       break;
     }
   }

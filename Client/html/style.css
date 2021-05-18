@@ -1,0 +1,114 @@
+
+body
+{
+  overflow-x: none !important;
+  overflow-y: none !important;
+}
+
+.left
+{
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 30vw;
+  height: 100vh;
+
+  border-right: black solid 2px;
+}
+
+.right
+{
+  position: absolute;
+
+  top: 0;
+  left: 30vw;
+
+  width: 70vw;
+  height: 100vh;
+}
+
+.msg-list
+{
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: calc(100% - 20px);
+  max-height: calc(100% - 20px);
+
+  overflow-y: scroll;
+}
+
+.msg-list::-webkit-scrollbar
+{
+  display: none;
+}
+
+.message
+{
+  position: absolute;
+  bottom: 17.5px;
+  left: 0;
+
+  height: 15px;
+  width: 100%;
+
+  border-top: black solid 2px;
+
+  background: #333;
+}
+
+.message input
+{
+  width: 90%;
+
+  height: 30px;
+  border: none !important;
+
+  background: #333;
+
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus
+{
+    outline: none;
+}
+
+.message button
+{
+  width: 9%;
+  height: 30px;
+  border: 0px;
+}
+
+.msg
+{
+  margin: 5px;
+  padding: 10px;
+}
+
+.msg-sender
+{
+  font-weight: bold;
+}
+
+.msg-content
+{
+  margin-top: 5px;
+  background: rgba(33, 33, 33);
+  border-radius: 5px;
+
+  padding: 2.5px;
+  color: white;
+
+  width: auto !important;
+}

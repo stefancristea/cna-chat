@@ -12,10 +12,28 @@
     <input type="text" id="user_name" placeholder="nickname..">
     <button onclick="onClick()">Join</button>
   </div>
-  <div id = "chat">
-    <ul id = "users-list">
-      
-    </ul>
+  <div id = "chat" style = "display: none;">
+
+    <div class = "left">
+      <ul id = "users-list"></ul>
+    </div>
+
+    <div class = "right">
+      <div class = "msg-list" id = "msg-list">
+
+        <div class = 'msg'><div class = "msg-sender">dsadada</div><div class = "msg-content">dsadadsad</div></div>
+        <div class = 'msg'><div class = "msg-sender">dsadada</div><div class = "msg-content">dsadadsad</div></div>
+        <div class = 'msg'><div class = "msg-sender">dsadada</div><div class = "msg-content">dsadadsad</div></div>
+        <div class = 'msg'><div class = "msg-sender">dsadada</div><div class = "msg-content">dsadadsad</div></div>
+        <div class = 'msg'><div class = "msg-sender">dsadada</div><div class = "msg-content">dsadadsad</div></div>
+
+      </div>
+      <div class = "message">
+        <input type = "text" id = "message"></input>
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
   </div>
 </body>
 

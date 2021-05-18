@@ -5,7 +5,7 @@ const grpc = require('grpc')
 
 const onReady = () =>
 {
-  const win = new BrowserWindow( { width: 800, height: 600, webPreferences: { nodeIntegration: true, contextIsolation: false } });
+  const win = new BrowserWindow( { width: 1280, height: 720, resizable: false, webPreferences: { nodeIntegration: true, contextIsolation: false } });
 
   win.removeMenu();
   win.webContents.openDevTools({ mode: "detach" });
@@ -15,7 +15,7 @@ const onReady = () =>
   const client = new service.ChatServiceClient('0.0.0.0:8999', grpc.credentials.createInsecure());
   const clientRequest = client.chatRequest();
 
-  ipcMain.handle('onLogin', (_event, userName) =>
+  ipcMain.handle('onLogin', (_, userName) =>
   {
     const loginMessage = new chat.ClientRequest();
 
@@ -23,6 +23,16 @@ const onReady = () =>
     loginMessage.setContent(userName);
 
     clientRequest.write(loginMessage);
+  });
+
+  ipcMain.handle('sendMessage', (_, messageText) =>
+  {
+      const messageRequest = new chat.ClientRequest();
+
+      messageRequest.setType(chat.ClientRequest.RequestType.MESSAGE);
+      messageRequest.setContent(messageText);
+
+      clientRequest.write(messageRequest);
   });
 
   clientRequest.on('data', (serverRequest) =>
