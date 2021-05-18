@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_package = "proto";
+
+service ChatService
+{
+  rpc chatRequest (stream ClientRequest) returns (stream ServerRequest) {}
+}
+
+message ClientRequest
+{
+  enum RequestType
+  {
+    CONNECT = 0;
+    MESSAGE = 1;
+  }
+
+  RequestType type = 1;
+  string content = 2; //content (numele pentru requestul de Connect, mesajul pentru cel de mesaj)
+}
+
+message ServerRequest
+{
+  enum ResponseType
+  {
+    ADD_USER = 0;
+    REMOVE_USER = 1;
+    MESSAGE = 2;
+  }
+
+  ResponseType type = 1;
+  string content = 2;
+  string sender = 3; //folosit de tipul de raspuns (mesaj)
+}
