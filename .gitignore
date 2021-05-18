@@ -7,6 +7,10 @@ Server/target
 Server/log.txt
 *.iml
 
+#Client
+
+Client/node_modules/*
+
 
 # Compiled class file
 *.class
