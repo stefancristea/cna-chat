@@ -2,6 +2,8 @@ const ipc = require('electron').ipcRenderer;
 window.$ = window.jQuery = require('jquery');
 
 const usersList = [];
+
+let currentUser = '';
 let isLogged = false;
 
 const onClick = () =>
@@ -19,18 +21,26 @@ const onClick = () =>
   }
 
   ipc.invoke('onLogin', userName);
+  currentUser = userName;
+
 };
 
 const sendMessage = () =>
 {
   const message = $("#message").val();
 
-  if (message == undefined)
+  if (message == undefined || message.length < 1)
     return;
 
   ipc.invoke('sendMessage', message);
   $("#message").val("");
 };
+
+$("#message").on('keyup', (e) =>
+{
+    if (e.key === 'Enter' || e.keyCode === 13)
+      sendMessage();
+});
 
 const onServerResponse = (response_string) =>
 {
@@ -67,7 +77,28 @@ const onServerResponse = (response_string) =>
       const message = response.content;
       const sender = response.sender;
 
-      $("#msg-list").append(`<div class = 'msg'><div class = "msg-sender">${sender}</div><div class = "msg-content">${message}</div></div>`);
+      if (currentUser != sender)
+      {
+        $("#messages").append(`<div class="incoming_msg">
+          <div class="received_msg">
+            <div class="received_withd_msg">
+              <span class="sender_name">${sender}</span>
+              <p>${message}</p>
+              </div>
+          </div>
+        </div>`);
+      }
+      else
+      {
+        $("#messages").append(`<div class="outgoing_msg">
+          <div class="sent_msg">
+            <p>${message}</p>
+          </div>
+        </div>`);
+      }
+
+      $(".msg_history").scrollTop(document.getElementsByClassName('msg_history')[0].scrollHeight);
+
       break;
     }
   }
@@ -79,5 +110,5 @@ const refreshUsers = () =>
   $("#users-list").html("");
 
   for(user of usersList)
-    $("#users-list").append(`<li>${user}</li>`);
+    $("#users-list").append(`<div class = "user">${user}</div>`);
 };
