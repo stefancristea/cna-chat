@@ -74,7 +74,7 @@ const onServerResponse = (response_string) =>
     }
     case 2:
     {
-      const message = response.content;
+      const message = format_string(response.content);
       const sender = response.sender;
 
       if (currentUser != sender)
@@ -112,3 +112,19 @@ const refreshUsers = () =>
   for(user of usersList)
     $("#users-list").append(`<div class = "user">${user}</div>`);
 };
+
+const format_string = (text) =>
+{
+
+  let final = '';
+
+  /*
+    Text italic
+  */
+
+  final = text.replaceAll(/\s_(\w+)_\s/g, (_, words) => {
+      return ` <i>${words}</i> `;
+  });
+
+  return final;
+}
