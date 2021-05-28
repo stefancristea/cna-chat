@@ -130,7 +130,7 @@ const format_string = (text) =>
     Text bold
   */
 
-  final = text.replaceAll(/\s\*(\w+)\*\s/g, (_, words) => {
+  final = final.replaceAll(/\s\*(\w+)\*\s/g, (_, words) => {
       return ` <b>${words}</b> `;
   });
 
@@ -138,8 +138,16 @@ const format_string = (text) =>
     Text striketrough
   */
 
-  final = text.replaceAll(/\s\~(\w+)\~\s/g, (_, words) => {
+  final = final.replaceAll(/\s\~(\w+)\~\s/g, (_, words) => {
       return ` <del>${words}</del> `;
+  });
+
+  /*
+    Text underline
+  */
+
+  final = final.replaceAll(/\s\`(\w+)\`\s/g, (_, words) => {
+      return ` <u>${words}</u> `;
   });
 
   return final;
