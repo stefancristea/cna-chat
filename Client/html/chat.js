@@ -32,7 +32,9 @@ const sendMessage = () =>
   if (message == undefined || message.length < 1)
     return;
 
-  ipc.invoke('sendMessage', message);
+  const html_stripped_message = message.replace(/<[^>]*>?/gm, '');
+
+  ipc.invoke('sendMessage', html_stripped_message);
   $("#message").val("");
 };
 
