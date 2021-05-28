@@ -126,5 +126,13 @@ const format_string = (text) =>
       return ` <i>${words}</i> `;
   });
 
+  /*
+    Text bold
+  */
+
+  final = text.replaceAll(/\s\*(\w+)\*\s/g, (_, words) => {
+      return ` <b>${words}</b> `;
+  });
+
   return final;
 }
