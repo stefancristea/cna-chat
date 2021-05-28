@@ -134,5 +134,13 @@ const format_string = (text) =>
       return ` <b>${words}</b> `;
   });
 
+  /*
+    Text striketrough
+  */
+
+  final = text.replaceAll(/\s\~(\w+)\~\s/g, (_, words) => {
+      return ` <del>${words}</del> `;
+  });
+
   return final;
 }
